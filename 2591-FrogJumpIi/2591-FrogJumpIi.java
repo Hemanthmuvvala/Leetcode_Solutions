@@ -1,0 +1,17 @@
+// Last updated: 7/12/2026, 11:13:50 PM
+class Solution {
+    public int maxJump(int[] stones) {
+        int ans = 0;
+        int n = stones.length;
+        if(stones.length == 2) return stones[1] - stones[0];
+        int[] dist = new int[n];
+        dist[n-1] = 0;
+        dist[n-2] = stones[n-1] - stones[n-2];
+        for(int i=n-3;i>=0;i--) {
+            int going = Math.max(stones[i+1] - stones[i], dist[i+1]);
+            int coming = Math.max(stones[i+2] - stones[i], dist[i+2]);
+            dist[i] = Math.max(going, coming);
+        }
+        return dist[0];
+    }
+}
