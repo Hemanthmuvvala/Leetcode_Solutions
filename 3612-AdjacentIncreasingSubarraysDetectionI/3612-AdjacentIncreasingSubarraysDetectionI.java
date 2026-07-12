@@ -1,0 +1,17 @@
+// Last updated: 7/12/2026, 11:12:56 PM
+class Solution {
+    public boolean hasIncreasingSubarrays(List<Integer> nums, int k) {
+        int n = nums.size();
+        int increasing = 1;
+        int prevIncreasing = 0;
+        for (int i = 1; i < n; i++) {
+            if (nums.get(i) > nums.get(i - 1)) increasing++;
+            else {
+                prevIncreasing = increasing;
+                increasing = 1;
+            }
+            if (increasing / 2 >= k || Math.min(prevIncreasing, increasing) >= k) return true;
+        }
+        return false;
+    }
+}
